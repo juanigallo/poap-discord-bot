@@ -31,4 +31,4 @@ MONGO=
 
 ### Demo
 
-![](https://fundit-cdn.sfo3.digitaloceanspaces.com/random-statics/poap-bot-demo.gif)
+[https://fundit-cdn.sfo3.digitaloceanspaces.com/random-statics/poap-bot-demo.mp4](https://fundit-cdn.sfo3.digitaloceanspaces.com/random-statics/poap-bot-demo.mp4)
