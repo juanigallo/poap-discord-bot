@@ -15,17 +15,26 @@ module.exports = (() => {
   })
 
   client.on('messageReactionAdd', async (reaction, user) => {
-    if (reaction.emoji.name == '👋') {
-      const poap = await POAPService.claim(reaction.message.id, user.id)
+    try {
+      if (reaction.emoji.name == '👋') {
+        const poap = await POAPService.claim(reaction.message.id, user.id)
 
-      if (poap) {
-        if (poap.err) return user.send(poap.msg ? poap.msg : 'There was an unhandled error')
-        const code = poap.codes[poap.claimed - 1]
-        return user.send(code)
-      } else {
-        return user.send("POAP not found")
+        if (poap) {
+          if (poap.err) return user.send(poap.msg ? poap.msg : 'There was an unhandled error')
+          const code = poap.codes[poap.claimed]
+          await user.send(code)
+          await POAPService.updateOwner(reaction.message.id, user.id)
+          return
+        } else {
+          console.log('POAP not found')
+          await user.send("POAP not found")
+          return
+        }
       }
+    } catch (err) {
+      console.log(err)
     }
+
   })
 
   client.login(process.env.TOKEN);
